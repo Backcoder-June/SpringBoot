@@ -1,9 +1,10 @@
 package June.Spring.demo.clientrepository;
 
 import June.Spring.demo.clientdomain.clientmemeber;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
-
+@Repository                        // Spring container 에게 넣어달라는 신호
 public class implementrepository implements memberrepository{       // interface implements 하고 method 도 다 import 한다
                                                                        // alt enter 활용
 
@@ -21,16 +22,19 @@ public class implementrepository implements memberrepository{       // interface
 
     @Override
     public clientmemeber save(clientmemeber member) {
-        member.setClientid(++sequence);   //객체 member 의 id (long) 를 ++sequnece 로 지정
-        store.put(member.getClientid(), member);       //Map 에 id, member 다 넣어둠
+        member.setClientid(++sequence);   //객체 member 의 id (long) 를 ++sequnece 로 지정  //Set
+        store.put(member.getClientid(), member);       //Map 에 id, member 다 넣어둠       //Get
         // store(Map) 기능 활용 -> id 를 key값으로 , member를 value 로 준다.
         //즉, Map(store) 에 id, member data 들을 .put(key, value) 으로 입력하면서 그게 "저장" 의 기능을 하는 것
 
         return member;                    // id 와 member 가 지정된 객체 member 값 반환
-    }
+    }                                    // save 라는 method 니까 return 값이 있어야함
 
     @Override
-    public Optional<clientmemeber> findByID(Long id) {
+    public Optional<clientmemeber> findByID(Long id) {     // 1. clinetmember 라는 data type을 취해야 함
+                                                           // 2. Null 값이 나올수 있어서 Optional 주고 싶음
+                                                           // => Optional<clinetmember> 이렇게 해주면 됨
+
         // return store.get(id);           // store(Map) 을 이용해 id 를 찾는다
          return Optional.ofNullable(store.get(id));  // Map 에서 .get(key) => value 값 반환 즉 여기선 member
                                                        // id(key) 로 member 찾는 메소드

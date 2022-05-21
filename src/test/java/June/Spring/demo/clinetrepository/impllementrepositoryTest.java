@@ -19,23 +19,18 @@ public class impllementrepositoryTest {
     public void afterEach(){                              // 이 메소드를 실행하겠다!
         repository.clearman();}                                   //원본에 clearman 만들어놓고 가져옴
 
-
-
-
-
-
 @Test                     // @Test 해주고
 //Test 할거 main 에서 처럼 하는것
     public void save() {                       // void 로 해주네. 보충필요
 clientmemeber m0 = new clientmemeber();    // 원본 => public clientmember save(clientmember member)
-                                           //save 용 clientmember 객체 생성
+                                           //save 용 clientmember 객체 생성  (그냥 domain 객체 생성하는거라고 봐도 될듯)
 m0.setClientname("June");                // clientmember 객체에 name 넣어주고
 
 repository.save(m0);                     //repository = 원본 객체의 메소드 save를 이용 -> m0 저장 => id 생성, June 저장(Map)
 
     //이제 저장은 했고 뽑아서 맞나 보겠다. (Boolean)
 
-    clientmemeber c1 = repository.findByID(m0.getClientid()).get();  //clt 6 + alt V -> 형식 완성시켜줌
+    clientmemeber c1 = repository.findByID(m0.getClientid()).get();  //clt + alt V -> 형식 완성시켜줌
                                                       //원래는 Optional 형식 -  .get() 으로 한번 까서 뽑을 수 있다.
     System.out.println("(c1==m0) = " + (c1==m0));  //soutv 로 value 값 boolean // 뽑은 c1 값이 save 된 m0과 같은지
     //sout 보다는 Assertion 많이 쓴다
@@ -82,6 +77,6 @@ repository.save(m0);                     //repository = 원본 객체의 메소�
     List<clientmemeber> c3 = repository.findAll();
 
     assertThat(c3.size()).isEqualTo(2);            //Expected : 1 / Actual : 2
-
+                                                             //size 로 검증
     }
 }

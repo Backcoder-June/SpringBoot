@@ -1,5 +1,5 @@
 package June.Spring.demo.controller;
-/*
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 // MVC, template engine 으로 Spring boot 웹 만들기
 // HTML 을 변환/렌더링 해서 웹에 내린다.
-
+/*
 @Controller                //web application 첫 진입점 , annotation 해준다 (여기 controller 있어요!)
 public class FirstController {
 
@@ -33,6 +33,7 @@ public class FirstController {
 }
 
     // API 방식으로 Spring Boot 웹 만들기
+
     // 웹에 HTML 을 주지 않는다. 단지 data 만 그대로 내린다. (페이지 소스보기)
     // (Static 정적 컨텐츠는 HTML 을 그대로 내린 것)
     // View 가 없다
@@ -75,7 +76,6 @@ public void setNick(String nick){                             // 넣을때
 
 
 }//
-
 */
 
 

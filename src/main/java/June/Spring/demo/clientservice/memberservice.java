@@ -11,19 +11,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service                                     //class memberservice 를 Spring container 에 등록시키기
-public class memberservice {
+public class memberservice {                 // Component Scanning 말고, Spring Config 로 직접 등록시키는 방법 => Config파일
     // 회원가입 business logic 만들기
     // join
 
     /**   여기부터 depencency injection  **/
     private final memberrepository A;          // interface repository 를 연결시키는데 -> 이걸 구현체 repository 로 해주는듯
-                                               // class repository 로 해도 돌아가긴 한다.
+    //private final <<                         // class repository 로 해도 돌아가긴 한다.
     @Autowired
     public memberservice(memberrepository A) {
         this.A = A;
     }
 
-    //왜 private final 로 했지?
+
 
     public void clearman(){
 

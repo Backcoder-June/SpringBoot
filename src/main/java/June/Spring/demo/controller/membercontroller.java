@@ -3,9 +3,12 @@ package June.Spring.demo.controller;
 import June.Spring.demo.clientservice.memberservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import June.Spring.demo.clientdomain.clientmemeber;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller                      // annotation -> Spring container 가 관리중
 public class membercontroller {             // membercontroller 라는 객체로 생성 => Spring Bean  관리
@@ -61,7 +64,7 @@ public class membercontroller {             // membercontroller 라는 객체로
 
         System.out.println("member = " +member.getClientid()+""+ member.getClientname());  // 잘 들어갔는지 확인용
                                       // id 값 null 로 나온다. 이것도 뽑아보자
-
+                                     // 이건 join 이후에 자동으로 생성되므로 불필요.
         // 이제 web 에서 name 을 치면 그게 domain name 이 되게는 만들었고,
         // 실제로 등록을 누르면, map 에 저장이 되게 만들자
 
@@ -70,5 +73,22 @@ public class membercontroller {             // membercontroller 라는 객체로
         return "redirect:/";                   // "등록" 누르면 위의 메소드들 실행되서 join 까지 완료되고
     }                                         //마지막에 return 으로 redirect 해서 "/" - home 으로 보낸다.
 
+    // 이제 회원 web 목록 조회 기능 만들어 보자
+
+    @GetMapping("/members")                                                    //web 회원목록 page
+    public String Allmember(Model model){                                      //Model 로 담는다
+
+        // memberservice 에 findmembers 메소드 사용하면 끝
+        // List 타입으로 담고 이 담은 객체를 model 에 담는다.
+        List<clientmemeber> bringall = memberservice.findmembers();
+        model.addAttribute("bringall", bringall);          //model 에 key, value 값 다 담은 객체로.
+
+
+        return "members/memberList";            // html 안의 $ 표시 이름들과 domain 에서 이름이 다 연계가 다 되어야한다
+                                             //member : $bringall
+                                       //clientmember 도메인의 객체 member 는 bringall 로 했고
+                                             //$member.clientid //$member.clientname
+                            //clientmember 도메인에서 정의한 clienid, clientname 이름으로 html 에 들어있어야 한다.
+    }
 
 }

@@ -1,5 +1,5 @@
 package June.Spring.demo;
-/*
+
 
 import June.Spring.demo.clientrepository.implementrepository;
 import June.Spring.demo.clientrepository.memberrepository;
@@ -31,4 +31,3 @@ public class Springconfig {               //Service 의 @service @autowired / Re
 // @Bean public M m() {return new (memory=>Db) memberrepository }  로 바로 바꿔줄 수 있다.
 
 
- */

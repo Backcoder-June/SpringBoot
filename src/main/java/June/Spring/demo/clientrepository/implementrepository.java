@@ -4,7 +4,7 @@ import June.Spring.demo.clientdomain.clientmemeber;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
-@Repository                        // Spring container 에게 넣어달라는 신호
+//@Repository                        // Spring container 에게 넣어달라는 신호
 public class implementrepository implements memberrepository{       // interface implements 하고 method 도 다 import 한다
                                                                        // alt enter 활용
 

@@ -1,16 +1,38 @@
 package June.Spring.demo;
 
 
-import June.Spring.demo.clientrepository.implementrepository;
+import June.Spring.demo.clientrepository.JPAmemberrepository;
+import June.Spring.demo.clientrepository.JdbcTemplatememberrepository;
 import June.Spring.demo.clientrepository.memberrepository;
 import June.Spring.demo.clientservice.memberservice;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.persistence.EntityManager;
 
 @Configuration                                  // Config class 에 @Configuration 주고
 public class Springconfig {               //Service 의 @service @autowired / Repository의 @repository  지워준다
 
     // memberservice 등록하기
+
+/*
+    private DataSource dataSource;
+
+    @Autowired
+    public Springconfig(DataSource dataSource){
+        this.dataSource = dataSource;
+    }
+*/
+
+    private EntityManager em;
+
+    @Autowired
+    public Springconfig(EntityManager em) {
+        this.em = em;
+    }
+
+
     @Bean                         // 여기 Spring Bean 있어요. 이거 Container 에 등록할게요!
     public memberservice memberService(){
         return new memberservice(memberRepository());   //**여기서 memberservice 에 인자값으로 memberrepository 의 객체를
@@ -19,7 +41,9 @@ public class Springconfig {               //Service 의 @service @autowired / Re
     // memberrepository (interface) 등록하기
     @Bean
     public memberrepository memberRepository(){
-        return new implementrepository();              // interface 는 new 가 안되므로, return 은 구현체 class repository
+//        return new implementrepository();              // interface 는 new 가 안되므로, return 은 구현체 class repository
+//    return new JdbcTemplatememberrepository(dataSource);
+      return new JPAmemberrepository(em);
     }
 }
 // service, repository(interface) 를 Bean 으로 올리고,

@@ -5,12 +5,15 @@ import June.Spring.demo.clientrepository.memberrepository;
 import June.Spring.demo.clientdomain.clientmemeber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 import java.util.List;
 import java.util.Optional;
 
 //@Service                                     //class memberservice 를 Spring container 에 등록시키기
+@Transactional
 public class memberservice {                 // Component Scanning 말고, Spring Config 로 직접 등록시키는 방법 => Config파일
     // 회원가입 business logic 만들기
     // join
